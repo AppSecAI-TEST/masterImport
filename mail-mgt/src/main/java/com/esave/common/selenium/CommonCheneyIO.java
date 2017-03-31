@@ -22,8 +22,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CommonCheneyIO {
 	
-	private WebDriverWait wait;
-	private WebDriver driver;
+	public WebDriverWait wait;
+	public WebDriver driver;
 
 	public void validateOrderStatus(WebDriver driver) throws InterruptedException {
 		// verification
@@ -100,7 +100,7 @@ public class CommonCheneyIO {
 		}
 	}
 
-	public boolean addProductsToCartPopUp(WebDriver driver) throws InterruptedException {
+	public boolean addProductsToCartPopUp(WebDriver driver) throws InterruptedException, AWTException {
 
 		try {
 
@@ -118,6 +118,10 @@ public class CommonCheneyIO {
 			}
 		} catch (NoAlertPresentException ex) {
 			// Alert not present
+			Robot robot = new Robot();
+			Thread.sleep(2000);
+			robot.keyPress(KeyEvent.VK_ENTER);
+			robot.keyRelease(KeyEvent.VK_ENTER);
 			ex.printStackTrace();
 			return false;
 		}

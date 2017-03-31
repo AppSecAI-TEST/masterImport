@@ -38,8 +38,8 @@ public class SeleniumItradeIO extends CommonCheneyIO {
 
 	private static final Logger logger = Logger.getLogger(SeleniumItradeIO.class);
 
-	private WebDriverWait wait;
-	private WebDriver driver;
+//	private WebDriverWait wait;
+//	private WebDriver driver;
 
 	public void start(OrderDetails orderDetails) {
 
@@ -55,46 +55,18 @@ public class SeleniumItradeIO extends CommonCheneyIO {
 
 			// Launch setProperty for chrome, Launch, Implicit wait & maximize
 			// Browser
-			System.setProperty("webdriver.chrome.driver",
-					"C:\\Users\\ImportOrder\\Downloads\\chromedriver_win32\\chromedriver.exe");
-			// RandomAction.setDownloadFilePath();
-			driver = new ChromeDriver();
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			// BrowserAction.ClearBrowserCache(driver);
-			driver.manage().window().maximize();
-
+			driver = Preconditions();
+			
 			// Enter username, pwd and Return successful
-			// LoginCheney(driver, userName, password);
-			driver.get("http://www.procurement.itradenetwork.com/Platform/Membership/Login");
-
-			Thread.sleep(2000);
-
-			// pass login credentials
-			wait = new WebDriverWait(driver, 15);
-			// enter username ##
-			WebElement chb_Username = wait.until(
-					ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[contains(@id,'username')]"))));
-			chb_Username.sendKeys(userName);
-
-			// enter password ##
-			WebElement chb_Password = wait.until(
-					ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[contains(@id,'password')]"))));
-			chb_Password.sendKeys(password);
-
-			driver.findElement(By.xpath("//input[contains(@id,'rememberMe')]")).click();
-
-			// click login
-			WebElement btn_Login = wait.until(ExpectedConditions
-					.elementToBeClickable(driver.findElement(By.xpath("//input[contains(@value,'Login')]"))));
-			btn_Login.click();
-
-			// logger.info("Login Successful");
-
-			// RandomAction.isFramePresent(driver);
-			Thread.sleep(2000);
+			// LoginCheney(driver, userName, password);		
+			try {	
+				logger.info("Login successful :- " + LoginCheney(driver, userName, password));
+			} catch (WebDriverException e) {
+				logger.info("Login failed");
+				e.getMessage();
+			}
 
 			// ordering
-
 			WebElement lnk_Ordering = wait.until(
 					ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//a[contains(.,'Ordering')]"))));
 			lnk_Ordering.click();
@@ -148,171 +120,38 @@ public class SeleniumItradeIO extends CommonCheneyIO {
 			logger.info("OrderFile uploaded");
 
 			// Update cart- Checkout1
-			// updateCart(driver);
-			try {
-				// Click _UpdateCart
-				// clickUpdatecart();
-				// get Link text
-				Thread.sleep(20000);
-				
-				WebElement lnk_UpdateCart = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By
-						.xpath("//ul[@class='rtbUL']/li[@class='rtbTemplate rtbItem'][2]/following-sibling::li[7]/a"))));
-				System.out.println("Link text : " + lnk_UpdateCart.getAttribute("title"));
-
-				// Click
-				if (lnk_UpdateCart.getAttribute("title").equalsIgnoreCase("Update Cart")) {
-					WebElement btn_UpdatecCart = wait
-							.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(
-									"//ul[@class='rtbUL']/li[@class='rtbTemplate rtbItem'][2]/following-sibling::li[7]/a/*/*"))));
-					btn_UpdatecCart.click();
-					System.out.println("Clicked on Update Cart");
-				} else {
-					driver.findElement(By
-							.xpath("//ul[@class='rtbUL']/li[@class='rtbTemplate rtbItem'][2]/following-sibling::li[7]/a/*/*"))
-							.click();
-				}
-
-			} catch (NoSuchElementException ne) {
-				Thread.sleep(5000);
-				// Click _UpdateCart
-				// clickUpdatecart();
-				// get Link text
-				WebElement lnk_UpdateCart = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By
-						.xpath("//ul[@class='rtbUL']/li[@class='rtbTemplate rtbItem'][2]/following-sibling::li[7]/a"))));
-				System.out.println("Link text : " + lnk_UpdateCart.getAttribute("title"));
-
-				Thread.sleep(20000);
-				// Click
-				if (lnk_UpdateCart.getAttribute("title").equalsIgnoreCase("Update Cart")) {
-					WebElement btn_UpdatecCart = wait
-							.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(
-									"//ul[@class='rtbUL']/li[@class='rtbTemplate rtbItem'][2]/following-sibling::li[7]/a/*/*"))));
-					btn_UpdatecCart.click();
-					System.out.println("Clicked on Update Cart");
-				} else {
-					driver.findElement(By
-							.xpath("//ul[@class='rtbUL']/li[@class='rtbTemplate rtbItem'][2]/following-sibling::li[7]/a/*/*"))
-							.click();
-				}
-				System.out.println("lnk_UpdateCart not clicked - NoSuchElementException");
-
-			} catch (TimeoutException te) {
-				Thread.sleep(5000);
-				// Click _UpdateCart
-				// clickUpdatecart();
-				// get Link text
-				WebElement lnk_UpdateCart = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By
-						.xpath("//ul[@class='rtbUL']/li[@class='rtbTemplate rtbItem'][2]/following-sibling::li[7]/a"))));
-				System.out.println("Link text : " + lnk_UpdateCart.getAttribute("title"));
-
-				Thread.sleep(20000);
-				// Click
-				if (lnk_UpdateCart.getAttribute("title").equalsIgnoreCase("Update Cart")) {
-					WebElement btn_UpdatecCart = wait
-							.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(
-									"//ul[@class='rtbUL']/li[@class='rtbTemplate rtbItem'][2]/following-sibling::li[7]/a/*/*"))));
-					btn_UpdatecCart.click();
-					System.out.println("Clicked on Update Cart");
-				} else {
-					driver.findElement(By
-							.xpath("//ul[@class='rtbUL']/li[@class='rtbTemplate rtbItem'][2]/following-sibling::li[7]/a/*/*"))
-							.click();
-				}
-				System.out.println("lnk_UpdateCart not clicked - TimeoutException");
-
-			} catch (WebDriverException e) {
-				Thread.sleep(5000);
-				// Click _UpdateCart
-				// clickUpdatecart();
-				// get Link text
-				WebElement lnk_UpdateCart = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By
-						.xpath("//ul[@class='rtbUL']/li[@class='rtbTemplate rtbItem'][2]/following-sibling::li[7]/a"))));
-				System.out.println("Link text : " + lnk_UpdateCart.getAttribute("title"));
-
-				Thread.sleep(20000);
-				// Click
-				if (lnk_UpdateCart.getAttribute("title").equalsIgnoreCase("Update Cart")) {
-					WebElement btn_UpdatecCart = wait
-							.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(
-									"//ul[@class='rtbUL']/li[@class='rtbTemplate rtbItem'][2]/following-sibling::li[7]/a/*/*"))));
-					btn_UpdatecCart.click();
-					System.out.println("Clicked on Update Cart");
-				} else {
-					driver.findElement(By
-							.xpath("//ul[@class='rtbUL']/li[@class='rtbTemplate rtbItem'][2]/following-sibling::li[7]/a/*/*"))
-							.click();
-				}
-				System.out.println("lnk_UpdateCart not clicked - WebDriverException");
-
-			}
+			updateCart(driver);
 
 			// Pop Up- confirm - Checkout2
-			try {
 
-				// Check the presence of alert
-				Thread.sleep(2000);
-				Alert alert = driver.switchTo().alert();
-				System.out.println(alert.getText());
-				// if present consume the alert
-				if (alert.getText().equalsIgnoreCase("Add all valid products to your cart?")) {
-					alert.accept();
-					Thread.sleep(3000);
-				} else {
-					System.out.println(alert.getText());
-				}
-			} catch (NoAlertPresentException ex) {
-				// Alert not present
-				Robot robot = new Robot();
-				Thread.sleep(2000);
-				robot.keyPress(KeyEvent.VK_ENTER);
-				robot.keyRelease(KeyEvent.VK_ENTER);
+
+			 try {
+				if (addProductsToCartPopUp(driver) == true) {
+				 // Go To Cart
+				 goToCart(driver);
 				
-				ex.printStackTrace();
+				 }
+			} catch (Exception e) {
+				goToCart(driver);
+				e.printStackTrace();
 			}
-
-			Thread.sleep(2000);
-			
-			WebElement btn_GoToCart = wait.until(ExpectedConditions
-					.elementToBeClickable(driver.findElement(By.xpath("//div[@class='right-arrow-text'][1]"))));
-			// div[@id='TitleBar']/*/*/div[@id='TitleBarActionNavButtons']/*
-			if (btn_GoToCart.getText().equalsIgnoreCase("Go to Cart")) {
-				btn_GoToCart.click();
-				logger.info("Gotocart");
-			} else {
-				driver.findElement(By.xpath("//div[@class='right-arrow-text'][1]")).click();
-			}
-
-			// if (addProductsToCartPopUp(driver) == true) {
-			// // Go To Cart
-			// //goToCart(driver);
-			//
-			// }
-			// else {
-			//
-			// }
-			// Final- checkout3
-			// checkOut(driver);
-			Thread.sleep(2000);
-			WebElement btn_CheckOut = wait.until(ExpectedConditions
-					.elementToBeClickable(driver.findElement(By.xpath("//div[@class='right-arrow-text'][1]"))));
-			if (btn_CheckOut.getText().equalsIgnoreCase("Checkout")) {
-				btn_CheckOut.click();
-				logger.info("Final Checkout");
-			}
+			 
+			 // Final- checkout3
+			 checkOut(driver);
 
 			// Validate/ Submit Order
 			// validateOrder(driver);
 			//poNumber maxLengthRestriction OptionalField
-			// Submit ---#s
+			// Submit ---#
 			// submitOrder(driver);
 			// validate/ Submit btn
 			WebElement btn_SubmitOrder = wait.until(ExpectedConditions.elementToBeClickable(
 					driver.findElement(By.xpath("//div[@class='orderInfo category-font']/*/div[7]"))));
 			logger.info(btn_SubmitOrder.getText());
-			btn_SubmitOrder.click();
+		//	btn_SubmitOrder.click();
 
 			Thread.sleep(2000);
-
+			errorScreenshot(driver, orderID);
 			// Confirm Order Status
 			// validateOrderStatus(driver);
 //			if (driver
