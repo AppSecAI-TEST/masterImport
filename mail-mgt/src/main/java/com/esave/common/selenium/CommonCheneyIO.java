@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
@@ -24,6 +25,7 @@ public class CommonCheneyIO {
 	
 	public WebDriverWait wait;
 	public WebDriver driver;
+	private static final Logger logger = Logger.getLogger(CommonCheneyIO.class);
 
 	public void validateOrderStatus(WebDriver driver) throws InterruptedException {
 		// verification
@@ -91,7 +93,7 @@ public class CommonCheneyIO {
 			// div[@id='TitleBar']/*/*/div[@id='TitleBarActionNavButtons']/*
 			if (btn_GoToCart.getText().equalsIgnoreCase("Go to Cart")) {
 				btn_GoToCart.click();
-				System.out.println("Gotocart");
+				logger.info("Clicked - Gotocart");
 			} else {
 				driver.findElement(By.xpath("//div[@class='right-arrow-text'][1]")).click();
 			}
@@ -103,17 +105,16 @@ public class CommonCheneyIO {
 	public boolean addProductsToCartPopUp(WebDriver driver) throws InterruptedException, AWTException {
 
 		try {
-
+			Thread.sleep(2000);
 			// Check the presence of alert
 			Alert alert = driver.switchTo().alert();
-			System.out.println(alert.getText());
+			logger.info("Text of Alert pop up :- " + alert.getText());
 			// if present consume the alert
 			if (alert.getText().equalsIgnoreCase("Add all valid products to your cart?")) {
 				alert.accept();
 				Thread.sleep(3000);
 				return true;
 			} else {
-				System.out.println(alert.getText());
 				return false;
 			}
 		} catch (NoAlertPresentException ex) {
@@ -132,6 +133,7 @@ public class CommonCheneyIO {
 		try {
 			// Click _UpdateCart
 			clickUpdatecart();
+			logger.info("Clicked on Update Cart");
 
 		} catch (NoSuchElementException ne) {
 			Thread.sleep(5000);

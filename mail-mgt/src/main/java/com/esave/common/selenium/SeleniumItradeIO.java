@@ -126,6 +126,7 @@ public class SeleniumItradeIO extends CommonCheneyIO {
 
 
 			 try {
+				
 				if (addProductsToCartPopUp(driver) == true) {
 				 // Go To Cart
 				 goToCart(driver);
