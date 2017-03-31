@@ -105,7 +105,6 @@ public class CommonCheneyIO {
 	public boolean addProductsToCartPopUp(WebDriver driver) throws InterruptedException, AWTException {
 
 		try {
-			Thread.sleep(2000);
 			// Check the presence of alert
 			Alert alert = driver.switchTo().alert();
 			logger.info("Text of Alert pop up :- " + alert.getText());
