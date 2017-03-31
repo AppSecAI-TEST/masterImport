@@ -123,7 +123,7 @@ public class SeleniumItradeIO extends CommonCheneyIO {
 
 			// Update cart- Checkout1
 			updateCart(driver);
-		//	errorScreenshot(driver, orderID);
+			errorScreenshot(driver, orderID);
 			// Pop Up- confirm - Checkout2
 
 
@@ -132,7 +132,7 @@ public class SeleniumItradeIO extends CommonCheneyIO {
 				if (addProductsToCartPopUp(driver) == true) {
 				 // Go To Cart
 				 goToCart(driver);
-	//			errorScreenshot(driver, orderID);
+				errorScreenshot(driver, orderID);
 				 }
 			} catch (Exception e) {
 				goToCart(driver);
@@ -141,6 +141,7 @@ public class SeleniumItradeIO extends CommonCheneyIO {
 			 
 			 // Final- checkout3
 			 checkOut(driver);
+			 errorScreenshot(driver, orderID);
 
 			// Validate/ Submit Order
 			// validateOrder(driver);
