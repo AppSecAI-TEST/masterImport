@@ -97,7 +97,7 @@ public class SeleniumItradeIO extends CommonCheneyIO {
 			act.moveToElement(driver.findElement(
 					By.xpath("//ul[@class='rtbUL']/li[@class='rtbTemplate rtbItem'][2]/following-sibling::li[1]")))
 					.click().build().perform();
-			errorScreenshot(driver, orderID);
+	//		errorScreenshot(driver, orderID);
 			// uploadFile(ss);
 			try {
 				Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
@@ -123,7 +123,7 @@ public class SeleniumItradeIO extends CommonCheneyIO {
 
 			// Update cart- Checkout1
 			updateCart(driver);
-			errorScreenshot(driver, orderID);
+		//	errorScreenshot(driver, orderID);
 			// Pop Up- confirm - Checkout2
 
 
@@ -132,7 +132,7 @@ public class SeleniumItradeIO extends CommonCheneyIO {
 				if (addProductsToCartPopUp(driver) == true) {
 				 // Go To Cart
 				 goToCart(driver);
-				errorScreenshot(driver, orderID);
+	//			errorScreenshot(driver, orderID);
 				 }
 			} catch (Exception e) {
 				goToCart(driver);
