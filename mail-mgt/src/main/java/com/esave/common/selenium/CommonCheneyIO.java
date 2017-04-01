@@ -6,6 +6,8 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
@@ -106,6 +108,7 @@ public class CommonCheneyIO {
 
 		try {
 			// Check the presence of alert
+			Thread.sleep(2000);
 			Alert alert = driver.switchTo().alert();
 			logger.info("Text of Alert pop up :- " + alert.getText());
 			// if present consume the alert
@@ -242,6 +245,18 @@ public class CommonCheneyIO {
 
 		return true;
 
+	}
+	
+	public boolean verifyUpload( WebDriver driver){
+		
+		ArrayList<WebElement> importedItems = new ArrayList<>(driver.findElements(By.xpath("//div[@id='DataEntryGrid']/div[@class=\"t-grid-content\"]/table/tbody/*")));
+		if (importedItems.size()==0) {
+			 System.out.println("No imported items exist");
+		}
+		else {
+			System.out.println("Size of Imported Items :- "+ importedItems.size());
+		}
+		return true;
 	}
 
 }

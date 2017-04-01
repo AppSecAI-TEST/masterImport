@@ -126,7 +126,6 @@ public class SeleniumItradeIO extends CommonCheneyIO {
 			errorScreenshot(driver, orderID);
 			// Pop Up- confirm - Checkout2
 
-
 			 try {
 				
 				if (addProductsToCartPopUp(driver) == true) {
@@ -134,7 +133,7 @@ public class SeleniumItradeIO extends CommonCheneyIO {
 				 goToCart(driver);
 				errorScreenshot(driver, orderID);
 				 }
-			} catch (Exception e) {
+			} catch (WebDriverException e) {
 				goToCart(driver);
 				e.printStackTrace();
 			}
